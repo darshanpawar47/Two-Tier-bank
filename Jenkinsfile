@@ -9,6 +9,11 @@ pipeline {
                 git branch: 'main', credentialsId: 'Github_credentials', url: 'https://github.com/darshanpawar47/Two-Tier-bank.git'
             }
         }
+	 stage('Build Application') {
+    steps {
+        sh 'mvn clean package'
+    }
+}
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t darshanpawar47/bankapp:latest .'
