@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    image: darshanpawar47/bankapp:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bankdb
+    ports:
+      - "3306:3306"
