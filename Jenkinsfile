@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'Github-credentials', url: 'https://github.com/darshanpawar47/Two-Tier-bank.git'
+                git branch: 'main', credentialsId: 'Github_credentials', url: 'https://github.com/darshanpawar47/Two-Tier-bank.git'
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t darshanpawar47/bankapp:latest ./app'
+                sh 'docker build -t darshanpawar47/bankapp:latest .'
             }
         }
         stage('Push to Docker Hub') {
