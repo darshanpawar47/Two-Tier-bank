@@ -1,12 +1,12 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // Add Docker Hub credentials in Jenkins
+        DOCKERHUB_CREDENTIALS = credentials('Docker') // Add Docker Hub credentials in Jenkins
     }
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/darshanpawar47/Two-Tier-bank.git'
+                git branch: 'main', credentialsId: 'Github-credentials', url: 'https://github.com/darshanpawar47/Two-Tier-bank.git'
             }
         }
         stage('Build Docker Image') {
