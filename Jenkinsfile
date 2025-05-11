@@ -27,6 +27,7 @@ pipeline {
         }
         stage('Deploy Application') {
             steps {
+		sh 'docker ps -q -f name=bankapp-conatiner && docker stop bankapp-container && docker rm bankapp-container || echo "Container not found or already stopped."'
 		sh 'docker run -d -p 8082:8082 --name bankapp-container darshanpawar47/bankapp:latest'
 		 
             }
