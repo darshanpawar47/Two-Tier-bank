@@ -27,8 +27,10 @@ pipeline {
         }
         stage('Deploy Application') {
             steps {
-                sh 'docker-compose -f docker-compose.yml down'
-                sh 'docker-compose -f docker-compose.yml up -d'
+        	# sh 'docker-compose -f docker-compose.yml down'
+        	# sh 'docker-compose -f docker-compose.yml up -d'
+		sh ' docker run -d -p 8082:8082 --name bankapp-container darshanpawar47/bankapp:latest'
+		 
             }
         }
     }
