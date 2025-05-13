@@ -2,21 +2,39 @@ package com.example.bankapp.controller;
 
 import com.example.bankapp.model.Account;
 import com.example.bankapp.service.AccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @Controller
+@RequestMapping
 public class BankController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BankController.class);
 
     @Autowired
     private AccountService accountService;
+
+    // REST endpoint to fetch account by ID
+    @ResponseBody
+    @GetMapping("/account/{id}")
+    public Account getAccount(@PathVariable Long id) {
+        logger.info("Fetching account with id: {}", id);
+        try {
+            Account account = accountService.findById(id);
+            logger.debug("Account retrieved: {}", account);
+            return account;
+        } catch (Exception e) {
+            logger.error("Error fetching account with id: {}", id, e);
+            throw e;
+        }
+    }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
@@ -94,5 +112,4 @@ public class BankController {
 
         return "redirect:/dashboard";
     }
-
 }
